@@ -5,10 +5,16 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy import Item, Field
 
 
-class PhdpositionseekerItem(scrapy.Item):
+class PhdpositionseekerItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    #标题
+    title = Field()
+    #介绍
+    content = Field()
+    #详细情况链接
+    #detailLink = Field()
+    
