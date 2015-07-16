@@ -11,14 +11,17 @@ class PhdPositionSeeker(CrawlSpider):
     	item = PhdpositionseekerItem()
     	selector = Selector(response)
 
-    	titles = selector.xpath("//h4[contains(@style,'line-height: normal;')]//strong")
+    	title_path = "//h4[contains(@style,'line-height: normal;')]//strong"
+    	content_path = "//h4[contains(@style,'line-height: normal;')]/following-sibling::p"
+
+    	titles = selector.xpath(title_path)
     	for title in titles:
-    		position_title = title.xpath("//h4[contains(@style,'line-height: normal;')]//strong/text()").extract()
+    		position_title = title.xpath(title_path + "/text()").extract()
     		item['title'] = position_title
 
-    	contents = selector.xpath("//h4[contains(@style,'line-height: normal;')]/following-sibling::p")
+    	contents = selector.xpath(content_path)
     	for content in contents:
-    		position_content = content.xpath("//h4[contains(@style,'line-height: normal;')]/following-sibling::p/text()").extract()
+    		position_content = content.xpath(content_path + "/text()").extract()
     		item['content'] = position_content
 
     	yield item
